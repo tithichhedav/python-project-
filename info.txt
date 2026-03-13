@@ -1,0 +1,326 @@
+If you are using **MySQL** instead of SQLite, the roadmap changes slightly because you’ll need a **database server connection** from Python. A common connector is **MySQL Connector/Python**.
+
+Below is a **complete roadmap for a Python GUI Hotel Reservation System using MySQL**.
+
+---
+
+# 🧭 Roadmap: Python GUI Hotel Reservation System (MySQL)
+
+## 1️⃣ Technologies Used
+
+**Backend:** Python
+**GUI:** Tkinter
+**Database:** MySQL
+**Connector:** MySQL Connector for Python
+
+Install connector:
+
+```bash
+pip install mysql-connector-python
+```
+
+---
+
+# 2️⃣ System Modules
+
+Your project should contain these modules:
+
+1. Login System
+2. Customer Management
+3. Room Management
+4. Reservation / Booking
+5. Check-In / Check-Out
+6. Billing System
+7. Database Connection
+
+---
+
+# 3️⃣ Database Design (MySQL)
+
+Create a database first.
+
+```sql
+CREATE DATABASE hotel_management;
+USE hotel_management;
+```
+
+---
+
+## Table 1: Customers
+
+```sql
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    address TEXT
+);
+```
+
+---
+
+## Table 2: Rooms
+
+```sql
+CREATE TABLE rooms (
+    room_id INT AUTO_INCREMENT PRIMARY KEY,
+    room_type VARCHAR(50),
+    price DECIMAL(10,2),
+    status VARCHAR(20)
+);
+```
+
+Example values for status:
+
+* Available
+* Booked
+* Maintenance
+
+---
+
+## Table 3: Reservations
+
+```sql
+CREATE TABLE reservations (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    room_id INT,
+    check_in DATE,
+    check_out DATE,
+    total_price DECIMAL(10,2),
+    status VARCHAR(20),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
+```
+
+---
+
+## Table 4: Payments
+
+```sql
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT,
+    amount DECIMAL(10,2),
+    payment_date DATE,
+    method VARCHAR(50),
+    FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id)
+);
+```
+
+---
+
+# 4️⃣ Connect Python to MySQL
+
+Example connection code:
+
+```python
+import mysql.connector
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="yourpassword",
+    database="hotel_management"
+)
+
+cursor = conn.cursor()
+```
+
+Test query:
+
+```python
+cursor.execute("SELECT * FROM rooms")
+for row in cursor:
+    print(row)
+```
+
+---
+
+# 5️⃣ Project Folder Structure
+
+```
+hotel_reservation_system/
+│
+├── main.py
+├── db_connection.py
+│
+├── modules/
+│   ├── login.py
+│   ├── customers.py
+│   ├── rooms.py
+│   ├── reservation.py
+│   └── billing.py
+│
+├── assets/
+│   └── images
+│
+└── sql/
+    └── hotel_database.sql
+```
+
+---
+
+# 6️⃣ GUI Windows to Create
+
+### 1 Login Window
+
+Fields:
+
+* Username
+* Password
+* Login button
+
+---
+
+### 2 Dashboard
+
+Buttons for:
+
+* Manage Customers
+* Manage Rooms
+* New Reservation
+* Check Out
+* Billing
+
+---
+
+### 3 Customer Window
+
+Functions:
+
+* Add Customer
+* Update Customer
+* Delete Customer
+* View Customers
+
+Use **Treeview table** to display data.
+
+---
+
+### 4 Room Management
+
+Admin can:
+
+* Add room
+* Update price
+* Change status
+
+---
+
+### 5 Reservation Window
+
+Steps:
+
+1. Select customer
+2. Select available room
+3. Choose check-in date
+4. Choose check-out date
+5. Calculate total price
+6. Save reservation
+
+---
+
+# 7️⃣ Reservation Logic
+
+### Room availability check
+
+```sql
+SELECT * FROM rooms WHERE status='Available';
+```
+
+---
+
+### Price Calculation
+
+Example:
+
+```python
+days = (checkout - checkin).days
+total_price = room_price * days
+```
+
+---
+
+### After Booking
+
+Update room status:
+
+```sql
+UPDATE rooms
+SET status='Booked'
+WHERE room_id=?
+```
+
+---
+
+# 8️⃣ Check-Out System
+
+When customer checks out:
+
+1. Calculate final bill
+2. Insert payment record
+3. Update reservation status
+4. Set room to **Available**
+
+Example:
+
+```sql
+UPDATE rooms
+SET status='Available'
+WHERE room_id=?
+```
+
+---
+
+# 9️⃣ Extra Features (Good for Marks)
+
+Add:
+
+* Search reservations
+* Room filter by type
+* Dashboard statistics
+* Generate bill
+* Booking history
+* Date picker for check-in/out
+
+---
+
+# 🔟 Testing
+
+Test cases:
+
+* Booking same room twice
+* Invalid customer ID
+* Checkout without booking
+* Price calculation errors
+
+---
+
+# 📊 Recommended Development Order
+
+1. Database setup (MySQL)
+2. Python–MySQL connection
+3. Login GUI
+4. Customer management
+5. Room management
+6. Reservation system
+7. Billing
+8. Testing and UI improvement
+
+---
+
+💡 **Professor-level improvement tip:**
+Add **MVC structure (Model-View-Controller)** so the code is more professional.
+
+---
+
+✅ If you want, I can also give you:
+
+* **Full MySQL database SQL file**
+* **Tkinter GUI layout design**
+* **Complete Python code (800–1200 lines)**
+* **ER diagram for your project report**
+* **Flowchart for hotel reservation system**.
