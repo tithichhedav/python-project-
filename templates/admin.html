@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Admin Dashboard</h2>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addHotelModal">
+            <i class="fas fa-plus me-2"></i>Add New Hotel
+        </button>
+    </div>
+
+    <div class="table-responsive bg-white rounded-4 shadow-sm p-3">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>City</th>
+                    <th>Price (₹)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hotel in hotels %}
+                <tr>
+                    <td class="fw-bold">{{ hotel.name }}</td>
+                    <td>{{ hotel.city }}</td>
+                    <td>{{ hotel.price }}</td>
+                    <td>
+                        <a href="/delete_hotel/{{ hotel.id }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addHotelModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/admin/add" method="POST" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Add New Property</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3"><input type="text" name="name" class="form-control" placeholder="Hotel Name" required></div>
+                <div class="mb-3"><input type="text" name="city" class="form-control" placeholder="City (e.g. Goa)" required></div>
+                <div class="mb-3"><input type="number" name="price" class="form-control" placeholder="Price per night" required></div>
+                <div class="mb-3"><textarea name="desc" class="form-control" placeholder="Description"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary w-100">Save Hotel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
