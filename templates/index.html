@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .hero-section {
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                    url('https://images.unsplash.com/photo-1510797215324-95aa89f43c33?auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        margin-top: -70px; /* Pulls image behind navbar */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .glass-search {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 24px;
+        padding: 40px;
+        width: 100%;
+        max-width: 900px;
+        color: white;
+    }
+    .feature-card {
+        transition: transform 0.3s;
+        border: none;
+        border-radius: 20px;
+        background: white;
+    }
+    .feature-card:hover { transform: translateY(-10px); }
+    .icon-box {
+        width: 60px; height: 60px;
+        background: #ff5a5f15;
+        color: #ff5a5f;
+        border-radius: 15px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 24px; margin-bottom: 20px;
+    }
+</style>
+
+<section class="hero-section">
+    <div class="container d-flex justify-content-center">
+        <div class="glass-search text-center shadow-lg">
+            <h1 class="display-3 fw-bold mb-2">Escape the Ordinary</h1>
+            <p class="lead mb-5 opacity-75">Book handcrafted stays across the soul of India.</p>
+            
+            <form action="/hotels" method="GET" class="row g-3 bg-white p-3 rounded-pill shadow-lg mx-auto" style="max-width: 800px;">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-0 text-muted"><i class="fas fa-map-marker-alt"></i></span>
+                        <select name="city" class="form-select border-0 shadow-none">
+                            <option value="Goa">Goa, India</option>
+                            <option value="Jaipur">Jaipur, Rajasthan</option>
+                            <option value="Mumbai">Mumbai, Maharashtra</option>
+                            <option value="Kerala">Kerala, Backwaters</option>
+                            <option value="Delhi">New Delhi, NCR</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 border-start">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-0 text-muted"><i class="fas fa-calendar"></i></span>
+                        <input type="text" placeholder="Add Dates" class="form-control border-0 shadow-none" onfocus="(this.type='date')">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">Explore Stays</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Experience IndiStay</h2>
+        <p class="text-muted">Beyond just a room, we provide memories.</p>
+    </div>
+    <div class="row g-4 text-start">
+        <div class="col-md-4">
+            <div class="card feature-card p-4 shadow-sm">
+                <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                <h5 class="fw-bold">Safe & Verified</h5>
+                <p class="text-muted small">Every property is physically inspected for quality and safety standards.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4 shadow-sm">
+                <div class="icon-box"><i class="fas fa-headset"></i></div>
+                <h5 class="fw-bold">24/7 Local Support</h5>
+                <p class="text-muted small">Our on-ground teams in every city are ready to assist you anytime.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4 shadow-sm">
+                <div class="icon-box"><i class="fas fa-utensils"></i></div>
+                <h5 class="fw-bold">Authentic Taste</h5>
+                <p class="text-muted small">Enjoy home-cooked local delicacies prepared by traditional chefs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
