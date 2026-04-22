@@ -58,4 +58,4 @@ Dishita: Frontend Lead & UI Designer (Glassmorphism & Navbar Logic).
 Adhishree: Full-Stack Engineer & Logic Lead (Auth, Sessions & Dashboard).
 
 Video Link:
-https://drive.google.com/drive/folders/1nMKUW7VZy5stXavRkM7Hubd_IQLUKfz_
+https://drive.google.com/drive/folders/1nMKUW7VZy5stXavRkM7Hubd_IQLUKfz_ .
